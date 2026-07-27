@@ -6,14 +6,95 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-    <title>Real Time Tracking</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>Real-Time Tracker</title>
 </head>
 
 <body>
+    <!-- Map Container -->
     <div id="map"></div>
+
+    <!-- Top Bar -->
+    <header id="topBar">
+        <div class="logo">
+            <span class="logo-icon">📍</span>
+            <div class="logo-text">
+                <h1>LiveTracker</h1>
+                <span class="logo-sub">Real-Time Location Sharing</span>
+            </div>
+        </div>
+        <div id="connectionCard" class="connection-card connected">
+            <div class="connection-status">
+                <span id="statusDot" class="status-dot connected"></span>
+                <span id="statusText">Connecting...</span>
+            </div>
+            <div class="user-count">
+                <span class="user-icon">👥</span>
+                <span id="userCount">0</span>
+                <span class="user-label">online</span>
+            </div>
+        </div>
+        <button id="shareBtn" class="share-btn" title="Share your live location" aria-label="Share live link">🔗</button>
+    </header>
+
+    <!-- Name Modal -->
+    <div id="nameModal" class="modal-overlay hidden">
+        <div class="modal-card">
+            <div class="modal-icon">📍</div>
+            <h2 class="modal-title">Welcome to LiveTracker</h2>
+            <p class="modal-sub">Enter your name to appear on the map</p>
+            <div class="modal-input-group">
+                <input id="nameInput" class="modal-input" type="text" placeholder="Your name..." maxlength="20" autocomplete="off" />
+                <button id="nameSubmit" class="modal-btn">Join</button>
+            </div>
+            <button id="nameSkip" class="modal-skip">Skip — stay anonymous</button>
+        </div>
+    </div>
+
+    <!-- Location Info Panel (bottom-left) -->
+    <div id="locationInfo" class="location-info">
+        <div class="loc-row">
+            <span class="loc-label">Lat</span>
+            <span id="coordLat" class="loc-value">—</span>
+            <span class="loc-label">Lng</span>
+            <span id="coordLng" class="loc-value">—</span>
+        </div>
+        <div class="loc-row">
+            <span class="loc-label">Accuracy</span>
+            <span id="coordAcc" class="loc-value">—</span>
+            <span class="loc-label">Source</span>
+            <span id="coordSource" class="loc-value">—</span>
+        </div>
+        <div class="loc-row">
+            <span class="loc-label">Speed</span>
+            <span id="coordSpeed" class="loc-value speed">—</span>
+        </div>
+        <div class="loc-row">
+            <span class="loc-label">Alt</span>
+            <span id="coordAlt" class="loc-value">—</span>
+            <canvas id="altCanvas" class="alt-canvas" width="140" height="36"></canvas>
+        </div>
+        <div class="loc-row loc-address">
+            <span class="loc-label">📍</span>
+            <span id="coordAddr" class="loc-value addr">Acquiring location...</span>
+        </div>
+    </div>
+
+    <!-- Toast notifications (bottom-center) -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <!-- Bottom attribution -->
+    <div id="attribution">
+        Powered by <a href="https://leafletjs.com/" target="_blank">Leaflet</a> &amp;
+        <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/script.js"></script>
 </body>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="/socket.io/socket.io.js"></script>
-<script src="/js/script.js"></script>
 
 </html>
