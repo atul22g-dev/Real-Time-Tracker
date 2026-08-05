@@ -622,3 +622,207 @@ body {
     color: var(--text-muted);
     font-weight: 400;
 }
+
+/* ===== Attribution (bottom) ===== */
+#attribution {
+    position: fixed;
+    bottom: 10px;
+    right: 12px;
+    z-index: 900;
+    font-size: 10px;
+    line-height: 1.5;
+    color: var(--text-muted);
+    background: rgba(10, 10, 20, 0.55);
+    padding: 3px 8px;
+    border-radius: 6px;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+#attribution a {
+    color: var(--text-secondary);
+    text-decoration: none;
+}
+
+#attribution a:hover {
+    color: var(--accent-secondary);
+}
+
+/* FitAll control stacks directly above the zoom control (avoids double-margin gap) */
+.leaflet-control-zoom.fitall-btn {
+    margin-bottom: 10px !important;
+}
+
+/* ===== Touch & Interaction Polish ===== */
+button,
+a,
+input,
+.leaflet-control-zoom a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+button,
+a,
+.leaflet-control-zoom a {
+    touch-action: manipulation;
+}
+
+html,
+body {
+    overscroll-behavior: none;
+}
+
+.logo-text {
+    white-space: nowrap;
+}
+
+/* ===== Responsive: Mobile Phones (≤640px) ===== */
+@media (max-width: 640px) {
+
+    /* ---------- Top Bar ---------- */
+    #topBar {
+        top: calc(env(safe-area-inset-top, 0px) + 10px);
+        min-width: 0;
+        max-width: calc(100vw - 16px);
+        gap: 10px;
+        padding: 8px 12px;
+        border-radius: 14px;
+    }
+
+    .logo {
+        gap: 8px;
+    }
+
+    .logo-icon {
+        font-size: 20px;
+    }
+
+    .logo-text h1 {
+        font-size: 15px;
+    }
+
+    .logo-sub {
+        display: none;
+    }
+
+    .connection-card {
+        gap: 8px;
+        padding: 6px 10px;
+    }
+
+    .user-label {
+        display: none;
+    }
+
+    .share-btn {
+        width: 34px;
+        height: 34px;
+        font-size: 15px;
+    }
+
+    /* ---------- Location Info Panel (bottom sheet) ---------- */
+    .location-info {
+        left: 50%;
+        bottom: calc(env(safe-area-inset-bottom, 0px) + 36px);
+        transform: translateX(-50%) translateY(12px);
+        width: calc(100% - 20px);
+        min-width: 0;
+        max-width: 440px;
+        padding: 10px 14px;
+        border-radius: 16px;
+    }
+
+    .location-info.visible {
+        transform: translateX(-50%) translateY(0);
+    }
+
+    .loc-row {
+        gap: 6px;
+    }
+
+    .loc-label {
+        min-width: 36px;
+    }
+
+    /* ---------- Map Controls ---------- */
+    /* Panel is ~174px tall + 36px bottom offset; controls sit above it with a clear gap */
+    .leaflet-control-zoom {
+        margin-bottom: calc(env(safe-area-inset-bottom, 0px) + 230px) !important;
+        margin-right: calc(env(safe-area-inset-right, 0px) + 12px) !important;
+    }
+
+    /* ---------- Toasts ---------- */
+    .toast-container {
+        bottom: calc(env(safe-area-inset-bottom, 0px) + 240px);
+        width: 100%;
+        padding: 0 12px;
+    }
+
+    .toast {
+        white-space: normal;
+        text-align: center;
+        max-width: 85vw;
+    }
+
+    /* ---------- Attribution ---------- */
+    #attribution {
+        left: 50%;
+        right: auto;
+        bottom: calc(env(safe-area-inset-bottom, 0px) + 4px);
+        transform: translateX(-50%);
+        font-size: 9px;
+        padding: 2px 6px;
+        white-space: nowrap;
+        max-width: 92vw;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    /* ---------- Modal & Inputs ---------- */
+    .modal-input {
+        font-size: 16px;
+        /* ≥16px prevents iOS auto-zoom on focus */
+    }
+
+    .modal-card {
+        padding: 28px 20px 24px;
+        max-height: 88dvh;
+        overflow-y: auto;
+    }
+}
+
+/* ===== Responsive: Narrow Phones (≤480px) ===== */
+@media (max-width: 480px) {
+    /* Connection status text hides only on phones; small tablets keep it */
+    #statusText {
+        display: none;
+    }
+}
+
+/* ===== Responsive: Short Landscape Phones (e.g. 667×375) ===== */
+@media (max-height: 500px) and (orientation: landscape) {
+    /* Compact the location panel so it doesn't dominate the short viewport */
+    .location-info {
+        padding: 6px 12px;
+        bottom: 12px;
+        max-width: 300px;
+    }
+
+    .loc-row {
+        padding: 1px 0;
+    }
+
+    .loc-row + .loc-row {
+        margin-top: 0;
+        padding-top: 3px;
+    }
+
+    .alt-canvas {
+        width: 100px;
+        height: 26px;
+    }
+
+    .toast-container {
+        bottom: 140px;
+    }
+}

@@ -94,7 +94,7 @@ function fitAllUsers() {
 L.Control.FitAll = L.Control.extend({
     options: { position: 'bottomright' },
     onAdd: function () {
-        const container = L.DomUtil.create('div', 'leaflet-control-zoom leaflet-bar');
+        const container = L.DomUtil.create('div', 'leaflet-control-zoom leaflet-bar fitall-btn');
         container.innerHTML = '<a id="fitAllBtn" href="#" role="button" title="Fit all users" aria-label="Fit all users" tabindex="0">⊞</a>';
         L.DomEvent.on(container, 'click', function (e) {
             L.DomEvent.preventDefault(e);
